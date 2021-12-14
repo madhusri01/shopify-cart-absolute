@@ -3,6 +3,7 @@ const nonceCreate = require("nonce")();
 
 const getInstallUrl = async (shop) => {
   let nonce = nonceCreate();
+
   try {
     await Shop.updateOne(
       { shop: shop },
@@ -27,4 +28,5 @@ const getInstallUrl = async (shop) => {
   );
 };
 
+//accessMode is not defined, so it is offline
 module.exports = getInstallUrl;

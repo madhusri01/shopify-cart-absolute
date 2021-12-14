@@ -9,7 +9,7 @@ const shopSchema = new Schema({
   installedOn: { type: Date, default: Date.now() },
   uninstalledOn: { type: Date, default: null },
   nonce: { type: String, default: null },
-  webhooks: { type: Object, default: {} },
+  //webhooks: { type: Object, default: {} },
   info: { type: Object, default: {} },
 });
 

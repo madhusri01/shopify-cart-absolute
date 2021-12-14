@@ -1,7 +1,7 @@
 const axios = require("axios");
 const Shop = require("../../models/shop");
 const verifyUrlHMAC = require("./helpers/verifyUrlHMAC");
-const addWebhooks = require("./helpers/addWebhook");
+//const addWebhooks = require("./helpers/addWebhook");
 
 const callback = async (req, res) => {
   //Step 1: Verify HMAC
@@ -92,7 +92,7 @@ const callback = async (req, res) => {
       {
         info: info.data.shop,
         nonce: null,
-        webhooks: {},
+        //webhooks: {},
       }
     );
   } catch (error) {
@@ -104,11 +104,11 @@ const callback = async (req, res) => {
     return;
   }
   //Step 5: create webhooks
-  addWebhooks(
-    req.query.shop.replace("https://", "").replace("http://", ""),
-    accessToken.data.access_token,
-    ["app/uninstalled", "shop/update"]
-  );
+  // addWebhooks(
+  //   req.query.shop.replace("https://", "").replace("http://", ""),
+  //   accessToken.data.access_token,
+  //   ["app/uninstalled", "shop/update"]
+  // );
 
   //Step 6: Redirect to the index page with shop params
   const url =

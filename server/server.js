@@ -28,7 +28,7 @@ const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = nextapp({ dev });
 const handle = app.getRequestHandler();
-
+const cors = require("cors");
 require("./config");
 
 const mongoose = require("mongoose");
@@ -44,7 +44,9 @@ mongoose.connect(MONGODB_URI, {
 //init routes
 const authRoutes = require("./routers/auth");
 const apiRoutes = require("./routers/api");
-const webhookRoutes = require("./routers/webhook");
+//const webhookRoutes = require("./routers/webhook");
+
+server.use(cors());
 
 //Serve static assets without auth
 server.get("/_next/*", (req, res) => {
@@ -58,11 +60,11 @@ server.use("/auth", authRoutes);
 server.use("/api", bodyParser.json(), apiRoutes);
 
 //Webhook Url
-server.use(
-  "/webhooks",
-  bodyParser.raw({ type: "application/json" }),
-  webhookRoutes
-);
+// server.use(
+//   "/webhooks",
+//   bodyParser.raw({ type: "application/json" }),
+//   webhookRoutes
+// );
 
 // Middleware for checking if shop param is present for all app page requests
 const checkShop = require("./middleware/checkShop");
